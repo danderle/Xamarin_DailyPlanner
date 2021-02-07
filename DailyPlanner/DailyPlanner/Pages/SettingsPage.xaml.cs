@@ -5,9 +5,9 @@ using Xamarin.Forms.Xaml;
 namespace DailyPlanner
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DashboardPage : TabbedPage
+    public partial class SettingsPage : ContentPage
     {
-        public DashboardPage()
+        public SettingsPage()
         {
             InitializeComponent();
         }

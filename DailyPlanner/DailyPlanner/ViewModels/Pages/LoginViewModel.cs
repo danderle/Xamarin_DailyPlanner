@@ -11,6 +11,16 @@ namespace DailyPlanner
 
         private INavigationService navigatioService;
 
+        private IAccountService accountService;
+
+        #endregion
+
+        #region Public Properties
+
+        public string Username { get; set; }
+
+        public string Password { get; set; }
+
         #endregion
 
         #region Commands
@@ -25,8 +35,9 @@ namespace DailyPlanner
         /// Overloaded Constructor
         /// </summary>
         /// <param name="_navigatioService"></param>
-        public LoginViewModel(INavigationService _navigatioService)
+        public LoginViewModel(INavigationService _navigatioService, IAccountService _accountSerivice)
         {
+            accountService = _accountSerivice;
             navigatioService = _navigatioService;
             SignInCommand = new RelayCommand(SignIn);
         }
@@ -38,9 +49,19 @@ namespace DailyPlanner
         /// <summary>
         /// Signs in and loads the dashboard page
         /// </summary>
-        private void SignIn()
+        private async void SignIn()
         {
-            navigatioService.NavigateToAsync<DashboardViewModel>();
+            var loginAttempt = await accountService.LogAsync(Username, Password);
+            if(loginAttempt)
+            {
+                //navigate to the Dashboard
+                await navigatioService.NavigateToAsync<DashboardViewModel>();
+            }
+            else
+            {
+                // TODO: Display an Alert for Failure!
+            }
+
         } 
 
         #endregion
