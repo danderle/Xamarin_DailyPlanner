@@ -7,14 +7,18 @@
         
         <NavigationPage Title="Profile">
             <x:Arguments>
-                <local:ProfilePage />
+                <local:ProfilePage BindingContext="{Binding ProfilePageViewModel}"/>
             </x:Arguments>
         </NavigationPage>
         <NavigationPage Title="Settings">
             <x:Arguments>
-                <local:SettingsPage/>
+                <local:SettingsPage BindingContext="{Binding SettingsPageViewModel}"/>
             </x:Arguments>
         </NavigationPage>
-        
+        <NavigationPage Title="Summary">
+            <x:Arguments>
+                <local:Summary BindingContext="{Binding SummaryPageViewModel}"/>
+            </x:Arguments>
+        </NavigationPage>
     </TabbedPage.Children>
 </TabbedPage>
