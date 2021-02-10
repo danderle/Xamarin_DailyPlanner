@@ -2,7 +2,10 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:DailyPlanner"
-             x:Class="DailyPlanner.DashboardPage">
+             x:Class="DailyPlanner.DashboardPage"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom">
+    
     <TabbedPage.Children>
         <NavigationPage Title="Plan">
             <x:Arguments>
