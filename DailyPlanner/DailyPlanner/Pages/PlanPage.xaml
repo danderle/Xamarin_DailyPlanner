@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyPlanner.PlanPage">
+    <ContentPage.Content>
+        
+        <!--Total page content-->
+        <StackLayout Margin="5"
+                     Background="{StaticResource LightBlueBrush}">
+            <!--Page Header-->
+            <Label Text="Start your day!"
+                   FontSize="20"
+                   HorizontalOptions="CenterAndExpand" />
+            
+            <!--Checkboxes for the week-->
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="CenterAndExpand">
+                <CheckBox />
+                <CheckBox />
+                <CheckBox />
+                <CheckBox />
+                <CheckBox />
+                <CheckBox />
+                <CheckBox />
+            </StackLayout>
+            
+            <!--Task Time Duration labels-->
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Task" HorizontalOptions="FillAndExpand" />
+                <Label Text="Time" HorizontalOptions="FillAndExpand" />
+                <Label Text="Duration" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <!--Task addition button-->
+            <Button Text="{StaticResource FontAwesomePlus}"
+                    FontFamily="{StaticResource FontAwesomeSolidFamily}"
+                    IsVisible="{Binding AdditionButtonVisible}"
+                    Command="{Binding AddTaskCommand}"
+                    FontSize="50"
+                    HorizontalOptions="StartAndExpand"/>
+
+            <!--All task items-->
+            <ListView ItemsSource="{Binding TaskItems}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Time}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="{Binding TimeToComplete}" HorizontalOptions="FillAndExpand" />
+                            <Label Text="{Binding TaskToComplete}" HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!--Summary-->
+            <StackLayout Background="{StaticResource LightBlueBrush}">
+                <Label Text="{Binding TotalPlannedTime, StringFormat='Total Planned Time: {0}'}"
+                       HorizontalOptions="CenterAndExpand"/>
+                <Label Text="{Binding TotalTasks, StringFormat='Planned Tasks: {0}'}"
+                       HorizontalOptions="CenterAndExpand"/>
+                
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

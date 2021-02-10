@@ -32,6 +32,9 @@ namespace DailyPlanner
             Register<DashboardViewModel, DashboardPage>();
             Register<LoginViewModel, LoginPage>();
             Register<ProfileViewModel, ProfilePage>();
+            Register<PlanViewModel, PlanPage>();
+            Register<SummaryViewModel, SummaryPage>();
+            Register<SettingsViewModel, SettingsPage>();
 
             //Register services (services are registered as singletons default)
             container.Register<INavigationService, NavigationService>();
@@ -45,7 +48,26 @@ namespace DailyPlanner
         /// <returns></returns>
         public static T Resolve<T>() where T : class
         {
-            return container.Resolve<T>();
+            try
+            {
+                return container.Resolve<T>();
+            }
+            catch (TinyIoCResolutionException e)
+            {
+                var message = e.Message;
+                System.Diagnostics.Debug.WriteLine(e.Message);
+
+                while (e.InnerException is TinyIoCResolutionException ex)
+                {
+                    message = ex.Message;
+                    System.Diagnostics.Debug.WriteLine("\t" + ex.Message);
+                    e = ex;
+                }
+#if DEBUG
+                App.Current.MainPage.DisplayAlert("Resolution Error", message, "Ok");
+#endif
+            }
+            return default(T);
         }
 
         /// <summary>

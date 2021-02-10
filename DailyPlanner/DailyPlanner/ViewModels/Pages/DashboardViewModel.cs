@@ -10,6 +10,11 @@ namespace DailyPlanner
         #region Public Properties
 
         /// <summary>
+        /// The View Model for the <see cref="PlanPage"/>
+        /// </summary>
+        public PlanViewModel PlanPageViewModel { get; set; }
+
+        /// <summary>
         /// The View Model for the <see cref="ProfilePage"/>
         /// </summary>
         public ProfileViewModel ProfilePageViewModel { get; set; }
@@ -36,11 +41,13 @@ namespace DailyPlanner
         /// <param name="summaryVM"></param>
         public DashboardViewModel(ProfileViewModel profileVM,
             SettingsViewModel settingsVM,
-            SummaryViewModel summaryVM)
+            SummaryViewModel summaryVM,
+            PlanViewModel planVM)
         {
             ProfilePageViewModel = profileVM;
             SettingsPageViewModel = settingsVM;
             SummaryPageViewModel = summaryVM;
+            PlanPageViewModel = planVM;
         }
 
         #endregion
@@ -55,8 +62,8 @@ namespace DailyPlanner
             return Task.WhenAny(base.InitializeAsync(navigationData),
                 ProfilePageViewModel.InitializeAsync(null),
                 SettingsPageViewModel.InitializeAsync(null),
-                SummaryPageViewModel.InitializeAsync(null)
-                );
+                SummaryPageViewModel.InitializeAsync(null),
+                PlanPageViewModel.InitializeAsync(null));
         }
     }
 }

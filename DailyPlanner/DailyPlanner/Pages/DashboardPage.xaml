@@ -4,7 +4,11 @@
             xmlns:local="clr-namespace:DailyPlanner"
              x:Class="DailyPlanner.DashboardPage">
     <TabbedPage.Children>
-        
+        <NavigationPage Title="Plan">
+            <x:Arguments>
+                <local:PlanPage BindingContext="{Binding PlanPageViewModel}"/>
+            </x:Arguments>
+        </NavigationPage>
         <NavigationPage Title="Profile">
             <x:Arguments>
                 <local:ProfilePage BindingContext="{Binding ProfilePageViewModel}"/>
@@ -17,7 +21,7 @@
         </NavigationPage>
         <NavigationPage Title="Summary">
             <x:Arguments>
-                <local:Summary BindingContext="{Binding SummaryPageViewModel}"/>
+                <local:SummaryPage BindingContext="{Binding SummaryPageViewModel}"/>
             </x:Arguments>
         </NavigationPage>
     </TabbedPage.Children>
