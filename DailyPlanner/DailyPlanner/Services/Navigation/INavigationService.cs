@@ -11,7 +11,8 @@ namespace DailyPlanner
         /// <param name="navigationData"></param>
         /// <param name="setRoot"></param>
         /// <returns></returns>
-        Task NavigateToAsync<TPageModelBase>(object navigationData = null, bool setRoot = false);
+        Task NavigateToAsync<TPageModelBase>(object navigationData = null, bool setRoot = false)
+            where TPageModelBase : BaseViewModel;
 
         /// <summary>
         /// Navigation method to pop off of the navigation stack
