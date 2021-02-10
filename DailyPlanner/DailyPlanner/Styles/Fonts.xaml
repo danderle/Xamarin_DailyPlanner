@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+
+    <system:String x:Key="FontAwesomeSolidFamily">FontAwesomeSolid</system:String>
+
+    <system:String x:Key="FontAwesomePlus">&#xf067;</system:String>
+    <system:String x:Key="FontAwesomeAngleRight">&#xf105;</system:String>
+    
+</ResourceDictionary>
