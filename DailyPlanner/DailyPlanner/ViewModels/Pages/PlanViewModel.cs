@@ -33,13 +33,14 @@ namespace DailyPlanner
         public PlanViewModel()
         {
             InitializeCommands();
-            TaskItems = new ObservableCollection<TaskItem>();
-            TotalPlannedTime = new TimeSpan();
+            
         }
         #endregion
 
         public override Task InitializeAsync(object navigationData = null)
         {
+            TaskItems = new ObservableCollection<TaskItem>();
+            TotalPlannedTime = new TimeSpan(); 
             return base.InitializeAsync(navigationData);
         }
 

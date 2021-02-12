@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyPlanner.TaskItemSetup">
+  <ContentView.Content>
+        <Frame CornerRadius="25"
+                BackgroundColor="{StaticResource DarkBlue}"
+                VerticalOptions="Center"
+                Margin="15">
+            <Grid RowDefinitions="*, *"
+                  ColumnDefinitions="*, 2*, *">
+                <Button Grid.Column="0"
+                        BackgroundColor="Transparent"
+                        Text="{StaticResource FontAwesomeAngleLeft}"
+                        Style="{StaticResource FontAwesomeButton}"/>
+                <Label Grid.Column="1" 
+                        Text="Task"
+                        Style="{StaticResource BaseLabelStyle}"/>
+                <Button Grid.Column="2"
+                        BackgroundColor="Transparent"
+                        Text="{StaticResource FontAwesomeAngleRight}"
+                        Style="{StaticResource FontAwesomeButton}"/>
+                <StackLayout HorizontalOptions="CenterAndExpand"
+                             Orientation="Horizontal"
+                             Grid.ColumnSpan="3"
+                             Grid.Row="1">
+                    <Button Style="{StaticResource FontAwesomeButton}"
+                            Text="{StaticResource FontAwesomeSave}"
+                            Margin="0,15,50,0"/>
+                    <Button Style="{StaticResource FontAwesomeButton}"
+                            Text="{StaticResource FontAwesomeTrash}"
+                            Margin="0,15,0,0"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

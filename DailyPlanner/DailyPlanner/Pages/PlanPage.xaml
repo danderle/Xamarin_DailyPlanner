@@ -1,65 +1,93 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DailyPlanner.PlanPage">
+             x:Class="DailyPlanner.PlanPage"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         
         <!--Total page content-->
-        <StackLayout Margin="5"
-                     Background="{StaticResource LightBlueBrush}">
-            <!--Page Header-->
-            <Label Text="Start your day!"
-                   FontSize="20"
-                   HorizontalOptions="CenterAndExpand" />
-            
-            <!--Checkboxes for the week-->
-            <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="CenterAndExpand">
-                <CheckBox />
-                <CheckBox />
-                <CheckBox />
-                <CheckBox />
-                <CheckBox />
-                <CheckBox />
-                <CheckBox />
-            </StackLayout>
-            
-            <!--Task Time Duration labels-->
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Task" HorizontalOptions="FillAndExpand" />
-                <Label Text="Time" HorizontalOptions="FillAndExpand" />
-                <Label Text="Duration" HorizontalOptions="FillAndExpand" />
-            </StackLayout>
+        <Grid>
+            <StackLayout >
+                <StackLayout Padding="20, 50, 20, 5"
+                         BackgroundColor="{StaticResource DarkBlue}">
+                    <!--Page Header-->
+                    <Label Text="Plan your day!"
+                       TextColor="{StaticResource White}"
+                           Style="{StaticResource LabelHeaderStyle}"/>
 
-            <!--Task addition button-->
-            <Button Text="{StaticResource FontAwesomePlus}"
+                    <!--Checkboxes for the week-->
+                    <StackLayout Orientation="Horizontal"
+                                HorizontalOptions="CenterAndExpand">
+                        <CheckBox Color="{StaticResource White}" />
+                        <CheckBox Color="{StaticResource White}"/>
+                        <CheckBox Color="{StaticResource White}"/>
+                        <CheckBox Color="{StaticResource White}"/>
+                        <CheckBox Color="{StaticResource White}"/>
+                        <CheckBox Color="{StaticResource White}"/>
+                        <CheckBox Color="{StaticResource White}"/>
+                    </StackLayout>
+
+                    <!--Task Time Duration labels-->
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Task" 
+                               Style="{StaticResource BaseLabelStyle}"/>
+                        <Label Text="Time"
+                               Style="{StaticResource BaseLabelStyle}"/>
+                        <Label Text="Duration" 
+                               Style="{StaticResource BaseLabelStyle}"/>
+                    </StackLayout>
+
+                </StackLayout>
+                <!--All task items-->
+                <ListView ItemsSource="{Binding TaskItems}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Time, StringFormat='{}{0:h:mm tt}}'}" HorizontalOptions="FillAndExpand" />
+                                <Label Text="{Binding TimeToComplete, '{}{0:h\\:mm}}'}" HorizontalOptions="FillAndExpand" />
+                                <Label Text="{Binding TaskToComplete}" HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <!--Task addition button-->
+                <Button Text="{StaticResource FontAwesomePlus}"
                     FontFamily="{StaticResource FontAwesomeSolidFamily}"
                     IsVisible="{Binding AdditionButtonVisible}"
                     Command="{Binding AddTaskCommand}"
                     FontSize="50"
-                    HorizontalOptions="StartAndExpand"/>
+                    HorizontalOptions="StartAndExpand"
+                    CornerRadius="10"
+                    BackgroundColor="{StaticResource DarkBlue}"/>
 
-            <!--All task items-->
-            <ListView ItemsSource="{Binding TaskItems}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding Time}" HorizontalOptions="FillAndExpand" />
-                            <Label Text="{Binding TimeToComplete}" HorizontalOptions="FillAndExpand" />
-                            <Label Text="{Binding TaskToComplete}" HorizontalOptions="FillAndExpand" />
-                        </StackLayout>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <!--Summary-->
-            <StackLayout Background="{StaticResource LightBlueBrush}">
-                <Label Text="{Binding TotalPlannedTime, StringFormat='Total Planned Time: {0}'}"
+                <!--Summary-->
+                <StackLayout BackgroundColor="{StaticResource DarkBlue}">
+                    <Label Text="{Binding TotalPlannedTime, StringFormat='Total Planned Time: {}{0:h\\:mm}}'}"
                        HorizontalOptions="CenterAndExpand"/>
-                <Label Text="{Binding TotalTasks, StringFormat='Planned Tasks: {0}'}"
+                    <Label Text="{Binding TotalTasks, StringFormat='Planned Tasks: {0}'}"
                        HorizontalOptions="CenterAndExpand"/>
-                
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+
+            <Frame CornerRadius="25"
+                   BackgroundColor="{StaticResource DarkBlue}"
+                   VerticalOptions="Center"
+                   Margin="15">
+                <Grid RowDefinitions="*,*"
+                      ColumnDefinitions="*, *, *">
+                    <Label Grid.Column="0" 
+                           Text="Task" 
+                           Style="{StaticResource BaseLabelStyle}"/>
+                    <Label Grid.Column="1"
+                           Text="Time" 
+                           Style="{StaticResource BaseLabelStyle}"/>
+                    <Label Grid.Column="2"
+                           Text="Duration" 
+                           Style="{StaticResource BaseLabelStyle}"/>
+                    
+                </Grid>
+            </Frame>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
