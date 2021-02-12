@@ -4,12 +4,11 @@
     
     
     <Color x:Key="Black">#000000</Color>
-    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}" />
     
     <Color x:Key="White">#FFFFFF</Color>
-    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}" />
 
     <Color x:Key="LightBlue">#33FFFF</Color>
-    <SolidColorBrush x:Key="LightBlueBrush" Color="{StaticResource LightBlue}" />
+
+    <Color x:Key="DarkBlue">#0080FF</Color>
 
 </ResourceDictionary>

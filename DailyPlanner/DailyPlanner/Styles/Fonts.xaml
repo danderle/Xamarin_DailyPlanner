@@ -5,7 +5,15 @@
 
     <system:String x:Key="FontAwesomeSolidFamily">FontAwesomeSolid</system:String>
 
+    <system:Double x:Key="FontSizeSmall">20</system:Double>
+    <system:Double x:Key="FontSizeMedium">30</system:Double>
+    <system:Double x:Key="FontSizeLarge">40</system:Double>
+    <system:Double x:Key="FontSizeXLarge">50</system:Double>
+
     <system:String x:Key="FontAwesomePlus">&#xf067;</system:String>
+    <system:String x:Key="FontAwesomeAngleLeft">&#xf104;</system:String>
     <system:String x:Key="FontAwesomeAngleRight">&#xf105;</system:String>
+    <system:String x:Key="FontAwesomeSave">&#xf0c7;</system:String>
+    <system:String x:Key="FontAwesomeTrash">&#xf1f8;</system:String>
     
 </ResourceDictionary>
