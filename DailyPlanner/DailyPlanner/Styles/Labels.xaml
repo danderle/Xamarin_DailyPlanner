@@ -6,6 +6,7 @@
         <Setter Property="TextColor" Value="{StaticResource White}"/>
         <Setter Property="FontSize" Value="{StaticResource FontSizeSmall}" />
         <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
     </Style>
 
     <Style TargetType="{x:Type Label}" x:Key="LabelHeaderStyle" BasedOn="{StaticResource BaseLabelStyle}">
