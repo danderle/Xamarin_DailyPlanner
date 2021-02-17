@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyPlanner.TaskItemSetupContent"
+             xmlns:local="clr-namespace:DailyPlanner"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BindingContext="{x:Static local:TaskItemSetupDesignModel.Instance}">
+    
+    <Frame CornerRadius="25"
+            BackgroundColor="{StaticResource DarkBlue}"
+            VerticalOptions="Center"
+            Margin="15">
+        <Grid RowDefinitions="*, *, *"
+                ColumnDefinitions="*, 2*, *">
+            <Button Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    Grid.RowSpan="2"
+                    VerticalOptions="CenterAndExpand"
+                    Text="{StaticResource FontAwesomeAngleLeft}"
+                    Style="{StaticResource FontAwesomeButton}"/>
+            <Button Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    Grid.RowSpan="2"
+                    VerticalOptions="CenterAndExpand"
+                    Text="{StaticResource FontAwesomeAngleRight}"
+                    Style="{StaticResource FontAwesomeButton}"/>
+            <!--Task-->
+            <StackLayout Grid.Column="1"
+                            Grid.RowSpan="2"
+                            IsVisible="False">
+                <Label Grid.Column="1" 
+                    Text="Task"
+                    VerticalOptions="StartAndExpand"
+                    Style="{StaticResource BaseLabelStyle}"/>
+                <Entry Grid.Column="1"
+                    Grid.Row="1"
+                    Placeholder="Your task"/>
+            </StackLayout>
+            <!--Time-->
+            <local:TimeSelectionContent Grid.Column="1"
+                                    Grid.RowSpan="2"
+                                    BindingContext="{Binding TimeSetup}"
+                                    IsVisible="False"/>
+            <!--Duration-->
+            <local:TimeSelectionContent Grid.Column="1"
+                                    Grid.RowSpan="2"
+                                    BindingContext="{Binding DurationSetup}"
+                                    IsVisible="False"/>
+            
+            <StackLayout HorizontalOptions="CenterAndExpand"
+                            Orientation="Horizontal"
+                            Grid.ColumnSpan="3"
+                            Grid.Row="2">
+                <Button Style="{StaticResource FontAwesomeButton}"
+                        Text="{StaticResource FontAwesomeSave}"
+                        Margin="0,15,15,0"/>
+                <Button Style="{StaticResource FontAwesomeButton}"
+                        Text="{StaticResource FontAwesomeTrash}"
+                        Margin="0,15,0,0"/>
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentView>

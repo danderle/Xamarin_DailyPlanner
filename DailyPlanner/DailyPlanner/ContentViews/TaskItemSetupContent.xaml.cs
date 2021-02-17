@@ -5,9 +5,9 @@ using Xamarin.Forms.Xaml;
 namespace DailyPlanner
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TaskItemSetup : ContentView
+    public partial class TaskItemSetupContent : ContentView
     {
-        public TaskItemSetup()
+        public TaskItemSetupContent()
         {
             InitializeComponent();
         }
