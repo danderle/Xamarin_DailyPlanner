@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyPlanner.TimeSelectionContent"
+             xmlns:local="clr-namespace:DailyPlanner"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BindingContext="{x:Static local:TimeSelectionDesignModel.Instance}">
+
+    <!--Time-->
+    <Frame BackgroundColor="LightCoral"
+           VerticalOptions="Center"
+           CornerRadius="30">
+        <Grid IsVisible="True"
+              RowDefinitions="Auto,Auto"
+              VerticalOptions="StartAndExpand">
+            <Label Text="{Binding HeaderLabel}"
+               Style="{StaticResource BaseLabelStyle}"/>
+            <StackLayout Grid.Row="1"
+                         Orientation="Horizontal">
+                <CarouselView ItemsSource="{Binding Hours}"
+                              CurrentItem="{Binding CurrentHour}"
+                              PeekAreaInsets="70">
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"/>
+                    </CarouselView.ItemsLayout>
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="CurrentItem">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="1.1" />
+                                                <Setter TargetName="MyHoursLabel" Property="Label.Scale" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="PreviousItem">
+                                            <VisualState.Setters>
+                                                <Setter Property="Opacity" Value="0.5" />
+                                                <Setter TargetName="MyHoursLabel" Property="Label.Opacity" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="NextItem">
+                                            <VisualState.Setters>
+                                                <Setter Property="Opacity" Value="0.5" />
+                                                <Setter TargetName="MyHoursLabel" Property="Label.Opacity" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="DefaultItem">
+                                            <VisualState.Setters>
+                                                <Setter Property="Opacity" Value="0.25" />
+                                                <Setter TargetName="MyHoursLabel" Property="Label.Opacity" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Label x:Name="MyHoursLabel"
+                                       Text="{Binding }" 
+                                       Style="{StaticResource BaseLabelStyle}"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <Label Text=":"
+                        Style="{StaticResource BaseLabelStyle}"/>
+                <CarouselView ItemsSource="{Binding Minutes}"
+                              CurrentItem="{Binding CurrentMinute}"
+                              PeekAreaInsets="70">
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"/>
+                    </CarouselView.ItemsLayout>
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Vertical">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="CurrentItem">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="1.1" />
+                                                <Setter TargetName="MyMinutesLabel" Property="Label.Scale" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="PreviousItem">
+                                            <VisualState.Setters>
+                                                <Setter Property="Opacity" Value="0.5" />
+                                                <Setter TargetName="MyMinutesLabel" Property="Label.Opacity" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="NextItem">
+                                            <VisualState.Setters>
+                                                <Setter Property="Opacity" Value="0.5" />
+                                                <Setter TargetName="MyMinutesLabel" Property="Label.Opacity" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="DefaultItem">
+                                            <VisualState.Setters>
+                                                <Setter Property="Opacity" Value="0.25" />
+                                                <Setter TargetName="MyMinutesLabel" Property="Label.Opacity" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Label x:Name="MyMinutesLabel"
+                                       Text="{Binding }" 
+                                       Style="{StaticResource BaseLabelStyle}"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentView>
