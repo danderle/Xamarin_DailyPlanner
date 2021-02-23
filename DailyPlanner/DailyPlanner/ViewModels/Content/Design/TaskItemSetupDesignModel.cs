@@ -20,8 +20,11 @@ namespace DailyPlanner
         /// </summary>
         public TaskItemSetupDesignModel()
         {
+            TaskSetup = new TaskSelectionViewModel();
             TimeSetup.Hours = new List<int> { 1, 2, 34 };
             TimeSetup.Minutes = new List<int> { 1, 2, 34 };
+            TaskSetup.IsVisible = true;
+            CurrentSetupShowing = 0;
         } 
 
         #endregion
