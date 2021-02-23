@@ -1,11 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DailyPlanner
 {
+    /// <summary>
+    /// View model for the <see cref="TimeSelectionContent"/>
+    /// </summary>
     public class TimeSelectionViewModel : BaseViewModel
     {
         #region Public Properties
+
+        public bool IsVisible { get; set; } = false;
 
         public int CurrentHour { get; set; } = 0;
 
@@ -40,10 +46,35 @@ namespace DailyPlanner
 
         #endregion
 
+        #region Public Methods
+
+        public TimeSpan GetTime()
+        {
+
+            return new TimeSpan(CurrentHour, CurrentMinute, 0);
+        }
+
+        public DateTime GetStartTime()
+        {
+
+            return new DateTime();
+        }
+
+        public TimeSpan GetTimeToComplete()
+        {
+            return new TimeSpan(CurrentHour, CurrentMinute, 0);
+        }
+
+        #endregion
+
+        #region Private Methods
+
         private void InitializeProperties()
         {
-            Hours = Enumerable.Range(0, 23).ToList();
-            Minutes = Enumerable.Range(0, 59).ToList();
-        }
+            Hours = Enumerable.Range(0, 24).ToList();
+            Minutes = Enumerable.Range(0, 60).ToList();
+        } 
+
+        #endregion
     }
 }
