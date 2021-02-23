@@ -34,6 +34,9 @@
     <Compile Update="ContentViews\TaskItemSetupContent.xaml.cs">
       <DependentUpon>TaskItemSetupContent.xaml</DependentUpon>
     </Compile>
+    <Compile Update="ContentViews\TaskSelectionContent.xaml.cs">
+      <DependentUpon>TaskSelectionContent.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ContentViews\TimeSelectionContent.xaml.cs">
       <DependentUpon>TimeSelectionContent.xaml</DependentUpon>
     </Compile>
