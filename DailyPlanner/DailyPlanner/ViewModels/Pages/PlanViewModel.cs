@@ -9,19 +9,29 @@ namespace DailyPlanner
     {
         #region Public Properties
 
+        public bool TaskItemSetupIsVisible { get; set; } = false;
+
         public bool AdditionButtonVisible { get; set; } = true;
 
-        public int TotalTasks { get; set; }
+        public bool OverlayIsVisible { get; set; } = false;
 
-        public TimeSpan TotalPlannedTime { get; set; }
+        public int TotalTasks { get; set; } = 0;
 
-        public ObservableCollection<TaskItem> TaskItems { get; set; }
+        public TimeSpan TotalPlannedTime { get; set; } = new TimeSpan();
+
+        public TaskItemSetupViewModel TaskItemSetup { get; set; } = new TaskItemSetupViewModel();
+
+        public ObservableCollection<TaskItem> TaskItems { get; set; } = new ObservableCollection<TaskItem>();
 
         #endregion
 
         #region Commands
 
         public ICommand AddTaskCommand { get; set; }
+
+        public ICommand SaveCommand { get; set; }
+
+        public ICommand TrashCommand { get; set; }
 
         #endregion
 
@@ -33,22 +43,36 @@ namespace DailyPlanner
         public PlanViewModel()
         {
             InitializeCommands();
-            
         }
-        #endregion
 
-        public override Task InitializeAsync(object navigationData = null)
-        {
-            TaskItems = new ObservableCollection<TaskItem>();
-            TotalPlannedTime = new TimeSpan(); 
-            return base.InitializeAsync(navigationData);
-        }
+        #endregion
 
         #region Command Methods
 
+        private void Save()
+        {
+            TaskItemSetupIsVisible = false;
+            OverlayIsVisible = false;
+            AdditionButtonVisible = true;
+            TaskItem item = TaskItemSetup.GetTaskItem();
+            TaskItems.Add(item);
+            TotalTasks++;
+            TotalPlannedTime += item.TimeToComplete;
+        }
+
+        private void Trash()
+        {
+            TaskItemSetupIsVisible = false;
+            OverlayIsVisible = false;
+            AdditionButtonVisible = true;
+        }
+
         private void AddTask()
         {
+            TaskItemSetupIsVisible = true;
             AdditionButtonVisible = false;
+            OverlayIsVisible = true;
+            TaskItemSetup = new TaskItemSetupViewModel();
         }
 
         #endregion
@@ -58,8 +82,10 @@ namespace DailyPlanner
         private void InitializeCommands()
         {
             AddTaskCommand = new RelayCommand(AddTask);
+            SaveCommand = new RelayCommand(Save);
+            TrashCommand = new RelayCommand(Trash);
         }
-        
+
         #endregion
     }
 }

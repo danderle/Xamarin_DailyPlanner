@@ -2,92 +2,107 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DailyPlanner.PlanPage"
-             NavigationPage.HasNavigationBar="False">
-    <ContentPage.Content>
+             xmlns:local="clr-namespace:DailyPlanner"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BindingContext="{x:Static local:PlanDesignModel.Instance}">
+    
+    <!--Total page content-->
+    <Grid>
         
-        <!--Total page content-->
-        <Grid>
-            <StackLayout >
-                <StackLayout Padding="20, 50, 20, 5"
-                         BackgroundColor="{StaticResource DarkBlue}">
-                    <!--Page Header-->
-                    <Label Text="Plan your day!"
-                       TextColor="{StaticResource White}"
-                           Style="{StaticResource LabelHeaderStyle}"/>
+        <StackLayout >
+            <StackLayout Padding="20, 50, 20, 5"
+                        BackgroundColor="{StaticResource DarkBlue}">
+                <!--Page Header-->
+                <Label Text="Plan your day!"
+                    TextColor="{StaticResource White}"
+                        Style="{StaticResource LabelHeaderStyle}"/>
 
-                    <!--Checkboxes for the week-->
-                    <StackLayout Orientation="Horizontal"
-                                HorizontalOptions="CenterAndExpand">
-                        <CheckBox Color="{StaticResource White}" />
-                        <CheckBox Color="{StaticResource White}"/>
-                        <CheckBox Color="{StaticResource White}"/>
-                        <CheckBox Color="{StaticResource White}"/>
-                        <CheckBox Color="{StaticResource White}"/>
-                        <CheckBox Color="{StaticResource White}"/>
-                        <CheckBox Color="{StaticResource White}"/>
-                    </StackLayout>
-
-                    <!--Task Time Duration labels-->
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Task" 
-                               Style="{StaticResource BaseLabelStyle}"/>
-                        <Label Text="Time"
-                               Style="{StaticResource BaseLabelStyle}"/>
-                        <Label Text="Duration" 
-                               Style="{StaticResource BaseLabelStyle}"/>
-                    </StackLayout>
-
+                <!--Checkboxes for the week-->
+                <StackLayout Orientation="Horizontal"
+                            HorizontalOptions="CenterAndExpand">
+                    <CheckBox Color="{StaticResource White}" />
+                    <CheckBox Color="{StaticResource White}"/>
+                    <CheckBox Color="{StaticResource White}"/>
+                    <CheckBox Color="{StaticResource White}"/>
+                    <CheckBox Color="{StaticResource White}"/>
+                    <CheckBox Color="{StaticResource White}"/>
+                    <CheckBox Color="{StaticResource White}"/>
                 </StackLayout>
-                <!--All task items-->
-                <ListView ItemsSource="{Binding TaskItems}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding Time, StringFormat='{}{0:h:mm tt}}'}" HorizontalOptions="FillAndExpand" />
-                                <Label Text="{Binding TimeToComplete, '{}{0:h\\:mm}}'}" HorizontalOptions="FillAndExpand" />
-                                <Label Text="{Binding TaskToComplete}" HorizontalOptions="FillAndExpand" />
-                            </StackLayout>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
 
-                <!--Task addition button-->
-                <Button Text="{StaticResource FontAwesomePlus}"
-                    FontFamily="{StaticResource FontAwesomeSolidFamily}"
-                    IsVisible="{Binding AdditionButtonVisible}"
-                    Command="{Binding AddTaskCommand}"
-                    FontSize="50"
-                    HorizontalOptions="StartAndExpand"
-                    CornerRadius="10"
-                    BackgroundColor="{StaticResource DarkBlue}"/>
-
-                <!--Summary-->
-                <StackLayout BackgroundColor="{StaticResource DarkBlue}">
-                    <Label Text="{Binding TotalPlannedTime, StringFormat='Total Planned Time: {}{0:h\\:mm}}'}"
-                       HorizontalOptions="CenterAndExpand"/>
-                    <Label Text="{Binding TotalTasks, StringFormat='Planned Tasks: {0}'}"
-                       HorizontalOptions="CenterAndExpand"/>
+                <!--Task Time Duration labels-->
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Task" 
+                            Style="{StaticResource BaseLabelStyle}"/>
+                    <Label Text="Time"
+                            Style="{StaticResource BaseLabelStyle}"/>
+                    <Label Text="Duration" 
+                            Style="{StaticResource BaseLabelStyle}"/>
                 </StackLayout>
+
             </StackLayout>
+            <!--All task items-->
+            <CollectionView ItemsSource="{Binding TaskItems}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*,*,*">
+                            <Label Grid.Column="0" Text="{Binding TaskToComplete}" HorizontalOptions="CenterAndExpand" />
+                            <Label Grid.Column="1" Text="{Binding StartTime, StringFormat='{}{0:hh\:mm}}'}" HorizontalOptions="CenterAndExpand" />
+                            <Label Grid.Column="2" Text="{Binding TimeToComplete, StringFormat='{}{0:hh\:mm}}'}" HorizontalOptions="CenterAndExpand" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-            <Frame CornerRadius="25"
-                   BackgroundColor="{StaticResource DarkBlue}"
-                   VerticalOptions="Center"
-                   Margin="15">
-                <Grid RowDefinitions="*,*"
-                      ColumnDefinitions="*, *, *">
-                    <Label Grid.Column="0" 
-                           Text="Task" 
-                           Style="{StaticResource BaseLabelStyle}"/>
-                    <Label Grid.Column="1"
-                           Text="Time" 
-                           Style="{StaticResource BaseLabelStyle}"/>
-                    <Label Grid.Column="2"
-                           Text="Duration" 
-                           Style="{StaticResource BaseLabelStyle}"/>
-                    
-                </Grid>
-            </Frame>
+            <!--Task addition button-->
+            <Button Text="{StaticResource FontAwesomePlus}"
+                FontFamily="{StaticResource FontAwesomeSolidFamily}"
+                IsVisible="{Binding AdditionButtonVisible}"
+                Command="{Binding AddTaskCommand}"
+                FontSize="50"
+                HorizontalOptions="Start"
+                CornerRadius="10"
+                BackgroundColor="{StaticResource DarkBlue}"/>
+
+            <!--Summary-->
+            <StackLayout BackgroundColor="{StaticResource DarkBlue}">
+                <Label Text="{Binding TotalPlannedTime, StringFormat='Total Planned Time: {}{0:h\\:mm}}'}"
+                    HorizontalOptions="CenterAndExpand"/>
+                <Label Text="{Binding TotalTasks, StringFormat='Planned Tasks: {0}'}"
+                    HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
+        </StackLayout>
+
+        <Grid BackgroundColor="White"
+              Opacity="0.6"
+              IsVisible="{Binding OverlayIsVisible}">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TrashCommand}" />
+            </Grid.GestureRecognizers>
         </Grid>
-    </ContentPage.Content>
+
+        <Frame CornerRadius="25"
+               IsVisible="{Binding TaskItemSetupIsVisible}"
+                BackgroundColor="{StaticResource DarkBlue}"
+                VerticalOptions="Center"
+                Margin="15">
+            <Grid RowDefinitions="2*,*">
+                <local:TaskItemSetupContent BindingContext="{Binding TaskItemSetup}" />
+                <StackLayout HorizontalOptions="CenterAndExpand"
+                            Orientation="Horizontal"
+                            Grid.Row="1">
+                    <Button Style="{StaticResource FontAwesomeButton}"
+                        Text="{StaticResource FontAwesomeSave}"
+                        Command="{Binding SaveCommand}"
+                        Margin="0,15,15,0"/>
+                    <Button Style="{StaticResource FontAwesomeButton}"
+                        Text="{StaticResource FontAwesomeTrash}"
+                        Command="{Binding TrashCommand}"
+                        Margin="0,15,0,0"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+    </Grid>
 </ContentPage>
