@@ -36,7 +36,17 @@ namespace DailyPlanner
                 "Side project",
                 "Other",
             };
-        } 
+        }
+
+        #region Public Methods
+
+        public string GetTask()
+        {
+            var task = DefineCustomTask ? CustomTask : SelectedTask;
+            return task;
+        }
+
+        #endregion
 
         #endregion
     }
