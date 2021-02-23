@@ -9,7 +9,7 @@ namespace DailyPlanner
 
         public string TaskToComplete { get; set; }
         
-        public DateTime Time { get; set; }
+        public TimeSpan StartTime { get; set; }
 
         public TimeSpan TimeToComplete { get; set; }
 
