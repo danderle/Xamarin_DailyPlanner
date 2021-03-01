@@ -23,14 +23,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="PropertyChanged.Fody" Version="3.3.1">
+    <PackageReference Include="PropertyChanged.Fody" Version="3.3.2">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1451" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ContentViews\TaskItemContent.xaml.cs">
+      <DependentUpon>TaskItemContent.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ContentViews\TaskItemSetupContent.xaml.cs">
       <DependentUpon>TaskItemSetupContent.xaml</DependentUpon>
     </Compile>
@@ -64,5 +67,9 @@
     <EmbeddedResource Update="Pages\ProfilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>

@@ -11,10 +11,9 @@
     
     <!--Total page content-->
     <Grid>
-        
-        <StackLayout >
-            <StackLayout Padding="20, 50, 20, 5"
-                        BackgroundColor="{StaticResource DarkBlue}">
+        <StackLayout>
+            <StackLayout BackgroundColor="{StaticResource DarkBlue}"
+                         Padding="20,5,20,5">
                 <!--Page Header-->
                 <Label Text="Plan your day!"
                     TextColor="{StaticResource White}"
@@ -35,43 +34,47 @@
                 <!--Task Time Duration labels-->
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Task" 
+                           HorizontalOptions="StartAndExpand"
                             Style="{StaticResource BaseLabelStyle}"/>
-                    <Label Text="Time"
+                    <Label Text="Start Time"
                             Style="{StaticResource BaseLabelStyle}"/>
                     <Label Text="Duration" 
+                           HorizontalOptions="EndAndExpand"
                             Style="{StaticResource BaseLabelStyle}"/>
                 </StackLayout>
-
             </StackLayout>
+            
             <!--All task items-->
-            <CollectionView ItemsSource="{Binding TaskItems}">
+            <CollectionView ItemsSource="{Binding TaskItems}"
+                            Margin="20,5"
+                            VerticalScrollBarVisibility="Default">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid ColumnDefinitions="*,*,*">
-                            <Label Grid.Column="0" Text="{Binding TaskToComplete}" HorizontalOptions="CenterAndExpand" />
-                            <Label Grid.Column="1" Text="{Binding StartTime, StringFormat='{}{0:hh\:mm}}'}" HorizontalOptions="CenterAndExpand" />
-                            <Label Grid.Column="2" Text="{Binding TimeToComplete, StringFormat='{}{0:hh\:mm}}'}" HorizontalOptions="CenterAndExpand" />
-                        </Grid>
+                        <local:TaskItemContent BindingContext="{Binding }" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
             <!--Task addition button-->
             <Button Text="{StaticResource FontAwesomePlus}"
-                FontFamily="{StaticResource FontAwesomeSolidFamily}"
-                IsVisible="{Binding AdditionButtonVisible}"
-                Command="{Binding AddTaskCommand}"
-                FontSize="50"
-                HorizontalOptions="Start"
-                CornerRadius="10"
-                BackgroundColor="{StaticResource DarkBlue}"/>
+                    FontFamily="{StaticResource FontAwesomeSolidFamily}"
+                    IsVisible="{Binding AdditionButtonVisible}"
+                    Command="{Binding AddTaskCommand}"
+                    FontSize="35"
+                    HeightRequest="{Binding Source={RelativeSource Self}, Path=WidthRequest}"
+                    HorizontalOptions="Start"
+                    CornerRadius="10"
+                    Margin="10, 20"
+                    BackgroundColor="{StaticResource DarkBlue}"/>
 
             <!--Summary-->
             <StackLayout BackgroundColor="{StaticResource DarkBlue}">
-                <Label Text="{Binding TotalPlannedTime, StringFormat='Total Planned Time: {}{0:h\\:mm}}'}"
-                    HorizontalOptions="CenterAndExpand"/>
+                <Label Text="{Binding TotalPlannedTime, StringFormat='Total Planned Time: {0:hh}:{0:mm}'}"
+                    HorizontalOptions="CenterAndExpand"
+                       Style="{StaticResource BaseLabelStyle}"/>
                 <Label Text="{Binding TotalTasks, StringFormat='Planned Tasks: {0}'}"
-                    HorizontalOptions="CenterAndExpand"/>
+                    HorizontalOptions="CenterAndExpand"
+                       Style="{StaticResource BaseLabelStyle}"/>
             </StackLayout>
         </StackLayout>
 

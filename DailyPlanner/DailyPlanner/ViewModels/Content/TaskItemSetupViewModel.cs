@@ -51,9 +51,9 @@ namespace DailyPlanner
 
         #region Public Methods
 
-        public TaskItem GetTaskItem()
+        public TaskItemViewModel GetTaskItem()
         {
-            var taskItem = new TaskItem
+            var taskItem = new TaskItemViewModel
             {
                 TaskToComplete = TaskSetup.GetTask(),
                 StartTime = TimeSetup.GetTime(),

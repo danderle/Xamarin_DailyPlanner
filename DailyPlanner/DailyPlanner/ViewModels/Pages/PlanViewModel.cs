@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -21,7 +22,7 @@ namespace DailyPlanner
 
         public TaskItemSetupViewModel TaskItemSetup { get; set; } = new TaskItemSetupViewModel();
 
-        public ObservableCollection<TaskItem> TaskItems { get; set; } = new ObservableCollection<TaskItem>();
+        public ObservableCollection<TaskItemViewModel> TaskItems { get; set; } = new ObservableCollection<TaskItemViewModel>();
 
         #endregion
 
@@ -30,8 +31,6 @@ namespace DailyPlanner
         public ICommand AddTaskCommand { get; set; }
 
         public ICommand SaveCommand { get; set; }
-
-        public ICommand TrashCommand { get; set; }
 
         #endregion
 
@@ -43,6 +42,17 @@ namespace DailyPlanner
         public PlanViewModel()
         {
             InitializeCommands();
+            TaskItemViewModel.ItemTrashed += OnItemTrashed;
+        }
+
+        private void OnItemTrashed()
+        {
+            var itemToDelete = TaskItems.First(t => t.TrashItem == true);
+            var index = TaskItems.IndexOf(itemToDelete);
+            if(index > -1)
+            {
+                TaskItems.RemoveAt(index);
+            }
         }
 
         #endregion
@@ -54,17 +64,12 @@ namespace DailyPlanner
             TaskItemSetupIsVisible = false;
             OverlayIsVisible = false;
             AdditionButtonVisible = true;
-            TaskItem item = TaskItemSetup.GetTaskItem();
+            TaskItemViewModel item = TaskItemSetup.GetTaskItem();
+            TotalPlannedTime += item.TimeToComplete;
             TaskItems.Add(item);
             TotalTasks++;
-            TotalPlannedTime += item.TimeToComplete;
-        }
-
-        private void Trash()
-        {
-            TaskItemSetupIsVisible = false;
-            OverlayIsVisible = false;
-            AdditionButtonVisible = true;
+            //Sort the items according to start time
+            TaskItems = new ObservableCollection<TaskItemViewModel>(TaskItems.OrderBy(t => t.StartTime));
         }
 
         private void AddTask()
@@ -83,7 +88,6 @@ namespace DailyPlanner
         {
             AddTaskCommand = new RelayCommand(AddTask);
             SaveCommand = new RelayCommand(Save);
-            TrashCommand = new RelayCommand(Trash);
         }
 
         #endregion
