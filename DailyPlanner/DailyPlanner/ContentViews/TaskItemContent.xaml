@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyPlanner.TaskItemContent"
+             xmlns:local="clr-namespace:DailyPlanner"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:BindingContext="{x:Static local:TaskItemDesignModel.Instance}">
+
+    <Grid ColumnDefinitions="{Binding DeleteVisible, Converter={local:BoolToColumnDefinitions}}">
+        <Grid.GestureRecognizers>
+            <SwipeGestureRecognizer Direction="Left" Command="{Binding OpenDeleteCommand}"/>
+            <SwipeGestureRecognizer Direction="Right" Command="{Binding CloseDeleteCommand}"/>
+        </Grid.GestureRecognizers>
+        <Label Grid.Column="0" 
+                Text="{Binding TaskToComplete}" 
+                HorizontalOptions="StartAndExpand" 
+                FontSize="{StaticResource FontSizeSmall}"
+               VerticalOptions="CenterAndExpand"/>
+        <Label Grid.Column="1" 
+                Text="{Binding StartTime, StringFormat='{0:hh}:{0:mm}'}" 
+                HorizontalOptions="CenterAndExpand"
+               VerticalOptions="CenterAndExpand"
+                FontSize="{StaticResource FontSizeSmall}"/>
+        <Label Grid.Column="2" 
+                Text="{Binding TimeToComplete, StringFormat='{0:hh}:{0:mm}'}" 
+                HorizontalOptions="EndAndExpand" 
+               VerticalOptions="CenterAndExpand"
+                FontSize="{StaticResource FontSizeSmall}"/>
+        <Button Grid.Column="{Binding DeleteVisible, Converter={local:BoolToColumn}}" 
+                IsVisible="{Binding DeleteVisible}"
+                Command="{Binding TrashCommand}"
+                Text="{StaticResource FontAwesomeTrash}"
+                FontFamily="{StaticResource FontAwesomeSolidFamily}" 
+                VerticalOptions="CenterAndExpand"/>
+    </Grid>
+</ContentView>
