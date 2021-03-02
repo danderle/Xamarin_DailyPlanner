@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              d:BindingContext="{x:Static local:TaskItemDesignModel.Instance}">
 
-    <Grid ColumnDefinitions="{Binding DeleteVisible, Converter={local:BoolToColumnDefinitions}}">
+    <Grid ColumnDefinitions="{Binding TrashEditVisible, Converter={local:BoolToColumnDefinitions}}">
         <Grid.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Left" Command="{Binding OpenDeleteCommand}"/>
             <SwipeGestureRecognizer Direction="Right" Command="{Binding CloseDeleteCommand}"/>
@@ -28,11 +28,17 @@
                 HorizontalOptions="EndAndExpand" 
                VerticalOptions="CenterAndExpand"
                 FontSize="{StaticResource FontSizeSmall}"/>
-        <Button Grid.Column="{Binding DeleteVisible, Converter={local:BoolToColumn}}" 
-                IsVisible="{Binding DeleteVisible}"
-                Command="{Binding TrashCommand}"
+        <StackLayout Grid.Column="{Binding TrashEditVisible, Converter={local:BoolToColumn}}" 
+                     IsVisible="{Binding TrashEditVisible}"
+                     Orientation="Horizontal">
+            <Button Command="{Binding EditCommand}"
+                Text="{StaticResource FontAwesomeEdit}"
+                FontFamily="{StaticResource FontAwesomeSolidFamily}" 
+                VerticalOptions="CenterAndExpand"/>
+            <Button Command="{Binding TrashCommand}"
                 Text="{StaticResource FontAwesomeTrash}"
                 FontFamily="{StaticResource FontAwesomeSolidFamily}" 
                 VerticalOptions="CenterAndExpand"/>
+        </StackLayout>
     </Grid>
 </ContentView>
