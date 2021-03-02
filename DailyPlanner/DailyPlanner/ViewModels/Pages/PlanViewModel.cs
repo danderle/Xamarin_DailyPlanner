@@ -6,8 +6,17 @@ using System.Windows.Input;
 
 namespace DailyPlanner
 {
+    /// <summary>
+    /// The view model for the <see cref="PlanPage"/>
+    /// </summary>
     public class PlanViewModel : BaseViewModel
     {
+        #region Fields
+
+        private int editingIndex = -1;
+
+        #endregion
+
         #region Public Properties
 
         public bool TaskItemSetupIsVisible { get; set; } = false;
@@ -43,15 +52,31 @@ namespace DailyPlanner
         {
             InitializeCommands();
             TaskItemViewModel.ItemTrashed += OnItemTrashed;
+            TaskItemViewModel.ItemEdit += OnItemEdit;
         }
+
+        #endregion
+
+        #region Event Handlers
 
         private void OnItemTrashed()
         {
             var itemToDelete = TaskItems.First(t => t.TrashItem == true);
             var index = TaskItems.IndexOf(itemToDelete);
-            if(index > -1)
+            if (index > -1)
             {
                 TaskItems.RemoveAt(index);
+            }
+        }
+
+        private void OnItemEdit()
+        {
+            var itemToEdit = TaskItems.First(t => t.EditItem == true);
+            if (itemToEdit != null)
+            {
+                TaskItemSetup = new TaskItemSetupViewModel(itemToEdit);
+                TaskItemSetupIsVisible = true;
+                editingIndex = TaskItems.IndexOf(itemToEdit);
             }
         }
 
@@ -61,6 +86,12 @@ namespace DailyPlanner
 
         private void Save()
         {
+            if(editingIndex > -1)
+            {
+                TaskItems.RemoveAt(editingIndex);
+                editingIndex = -1;
+            }
+
             TaskItemSetupIsVisible = false;
             OverlayIsVisible = false;
             AdditionButtonVisible = true;

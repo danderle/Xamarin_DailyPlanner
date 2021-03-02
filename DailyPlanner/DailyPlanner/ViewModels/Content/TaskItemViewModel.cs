@@ -3,14 +3,18 @@ using System.Windows.Input;
 
 namespace DailyPlanner
 {
-
+    /// <summary>
+    /// The view model for the <see cref="TaskItemContent"/>
+    /// </summary>
     public class TaskItemViewModel : BaseViewModel
     {
         #region Public Properties
 
         public bool TrashItem { get; set; } = false;
 
-        public bool DeleteVisible { get; set; } = false;
+        public bool EditItem { get; set; } = true;
+
+        public bool TrashEditVisible { get; set; } = false;
 
         public string TaskToComplete { get; set; }
         
@@ -19,6 +23,8 @@ namespace DailyPlanner
         public TimeSpan TimeToComplete { get; set; }
 
         public static event Action ItemTrashed;
+
+        public static event Action ItemEdit;
 
         #endregion
 
@@ -29,6 +35,8 @@ namespace DailyPlanner
         public ICommand CloseDeleteCommand { get; set; }
 
         public ICommand TrashCommand { get; set; }
+
+        public ICommand EditCommand { get; set; }
 
         #endregion
 
@@ -45,18 +53,24 @@ namespace DailyPlanner
 
         private void OpenDelete()
         {
-            DeleteVisible = true;
+            TrashEditVisible = true;
         }
 
         private void CloseDelete()
         {
-            DeleteVisible = false;
+            TrashEditVisible = false;
         }
 
         private void Trash()
         {
             TrashItem = true;
             ItemTrashed?.Invoke();
+        }
+
+        private void Edit()
+        {
+            EditItem = true;
+            ItemEdit?.Invoke();
         }
 
         #endregion
@@ -68,6 +82,7 @@ namespace DailyPlanner
             OpenDeleteCommand = new RelayCommand(OpenDelete);
             CloseDeleteCommand = new RelayCommand(CloseDelete);
             TrashCommand = new RelayCommand(Trash);
+            EditCommand = new RelayCommand(Edit);
         }
 
         #endregion

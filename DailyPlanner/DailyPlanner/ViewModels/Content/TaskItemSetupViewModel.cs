@@ -40,11 +40,18 @@ namespace DailyPlanner
 
         public TaskItemSetupViewModel()
         {
-            LeftCommand = new RelayCommand(Left);
-            RightCommand = new RelayCommand(Right);
-            
-            CurrentSetupShowing = 0;
-            TaskSetup.IsVisible = true;
+            InitializeCommands();
+            InitializeProperties();
+        }
+
+        public TaskItemSetupViewModel(TaskItemViewModel taskItem)
+        {
+            InitializeCommands();
+            InitializeProperties();
+
+            TaskSetup.SetTask(taskItem.TaskToComplete);
+            TimeSetup.SetTime(taskItem.StartTime);
+            DurationSetup.SetTime(taskItem.TimeToComplete);
         }
 
         #endregion
@@ -110,6 +117,17 @@ namespace DailyPlanner
             }
         }
 
+        private void InitializeCommands()
+        {
+            LeftCommand = new RelayCommand(Left);
+            RightCommand = new RelayCommand(Right);
+        }
+        
+        private void InitializeProperties()
+        {
+            CurrentSetupShowing = 0;
+            TaskSetup.IsVisible = true;
+        }
         #endregion
     }
 }
