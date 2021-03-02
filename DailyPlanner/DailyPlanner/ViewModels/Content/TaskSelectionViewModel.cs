@@ -46,6 +46,23 @@ namespace DailyPlanner
             return task;
         }
 
+        public void SetTask(string task)
+        {
+            var itemFound = false;
+            foreach(string item in PreDefinedTasks)
+            {
+                if(item == task)
+                {
+                    itemFound = true;
+                    SelectedTask = item;
+                }
+            }
+            if (!itemFound)
+            {
+                CustomTask = task;
+            }
+        }
+
         #endregion
 
         #endregion

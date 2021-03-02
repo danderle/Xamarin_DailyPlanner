@@ -65,6 +65,12 @@ namespace DailyPlanner
             return new TimeSpan(CurrentHour, CurrentMinute, 0);
         }
 
+        public void SetTime(TimeSpan timespan)
+        {
+            CurrentHour = timespan.Hours;
+            CurrentMinute = timespan.Minutes;
+        }
+
         #endregion
 
         #region Private Methods
