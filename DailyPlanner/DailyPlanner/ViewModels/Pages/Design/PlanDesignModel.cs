@@ -3,6 +3,9 @@ using System.Collections.ObjectModel;
 
 namespace DailyPlanner
 {
+    /// <summary>
+    /// The desig time model to aid in design mode
+    /// </summary>
     public class PlanDesignModel : PlanViewModel
     {
         #region Singleton
@@ -23,33 +26,36 @@ namespace DailyPlanner
         {
             OverlayIsVisible = false;
             TaskItemSetupIsVisible = false;
-            TaskItems = new ObservableCollection<TaskItem>
+            TotalPlannedTime = new TimeSpan(10, 15, 0);
+            TaskItems = new ObservableCollection<TaskItemViewModel>
             {
-                new TaskItem
+                new TaskItemViewModel
                 {
                     TaskToComplete = "First",
                     StartTime = new TimeSpan(7,1,0),
                     TimeToComplete = new TimeSpan(0,10,0),
+                    TrashEditVisible = false,
                 },
-                new TaskItem
+                new TaskItemViewModel
                 {
                     TaskToComplete = "second",
                     StartTime = new TimeSpan(7,8,0),
                     TimeToComplete = new TimeSpan(0,10,0),
+                    TrashEditVisible = true,
                 },
-                new TaskItem
+                new TaskItemViewModel
                 {
                     TaskToComplete = "third",
                     StartTime = new TimeSpan(8,30,0),
                     TimeToComplete = new TimeSpan(0,10,0),
                 },
-                new TaskItem
+                new TaskItemViewModel
                 {
                     TaskToComplete = "fifth",
                     StartTime = new TimeSpan(9,1,0),
                     TimeToComplete = new TimeSpan(0,10,0),
                 },
-                new TaskItem
+                new TaskItemViewModel
                 {
                     TaskToComplete = "sixth",
                     StartTime = new TimeSpan(10,1,0),

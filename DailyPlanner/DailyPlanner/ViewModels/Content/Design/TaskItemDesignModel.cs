@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace DailyPlanner
 {
+    /// <summary>
+    /// The desig time model to aid in design mode
+    /// </summary>
     public class TaskItemDesignModel : TaskItemViewModel
     {
         #region Singleton
@@ -20,6 +23,10 @@ namespace DailyPlanner
         /// </summary>
         public TaskItemDesignModel()
         {
+            TaskToComplete = "First";
+            StartTime = new TimeSpan(7, 1, 0);
+            TimeToComplete = new TimeSpan(0, 10, 0);
+            TrashEditVisible = true;
         } 
 
         #endregion
