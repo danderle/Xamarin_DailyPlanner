@@ -31,7 +31,7 @@
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="CurrentItem">
                                         <VisualState.Setters>
-                                            <Setter Property="Scale" Value="1.1" />
+                                            <Setter Property="Scale" Value="1.3" />
                                             <Setter TargetName="MyHoursLabel" Property="Label.Scale" Value="1"/>
                                         </VisualState.Setters>
                                     </VisualState>
@@ -56,7 +56,7 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <Label x:Name="MyHoursLabel"
-                                    Text="{Binding .}" 
+                                    Text="{Binding }" 
                                     Style="{StaticResource BaseLabelStyle}"/>
                         </StackLayout>
                     </DataTemplate>
@@ -64,50 +64,54 @@
             </CarouselView>
             <Label Text=":"
                     Style="{StaticResource BaseLabelStyle}"/>
-            <CarouselView ItemsSource="{Binding Minutes}"
-                            CurrentItem="{Binding CurrentMinute}"
+            <StackLayout>
+                <CarouselView ItemsSource="{Binding Minutes}"
+                          CurrentItem="{Binding CurrentMinute}"
                           PeekAreaInsets="40">
-                <CarouselView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical"/>
-                </CarouselView.ItemsLayout>
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Orientation="Vertical">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="CurrentItem">
-                                        <VisualState.Setters>
-                                            <Setter Property="Scale" Value="1.1" />
-                                            <Setter TargetName="MyMinutesLabel" Property="Label.Scale" Value="1"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="PreviousItem">
-                                        <VisualState.Setters>
-                                            <Setter Property="Opacity" Value="0.5" />
-                                            <Setter TargetName="MyMinutesLabel" Property="Label.Opacity" Value="1"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="NextItem">
-                                        <VisualState.Setters>
-                                            <Setter Property="Opacity" Value="0.5" />
-                                            <Setter TargetName="MyMinutesLabel" Property="Label.Opacity" Value="1"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="DefaultItem">
-                                        <VisualState.Setters>
-                                            <Setter Property="Opacity" Value="0.25" />
-                                            <Setter TargetName="MyMinutesLabel" Property="Label.Opacity" Value="1"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Label x:Name="MyMinutesLabel"
-                                    Text="{Binding .}" 
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                       SnapPointsAlignment="Center"
+                                       SnapPointsType="Mandatory"/>
+                    </CarouselView.ItemsLayout>
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="CurrentItem">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="1.3" />
+                                                <Setter TargetName="MyMinutesLabel" Property="Label.Scale" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="PreviousItem">
+                                            <VisualState.Setters>
+                                                <Setter Property="Opacity" Value="0.5" />
+                                                <Setter TargetName="MyMinutesLabel" Property="Label.Opacity" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="NextItem">
+                                            <VisualState.Setters>
+                                                <Setter Property="Opacity" Value="0.5" />
+                                                <Setter TargetName="MyMinutesLabel" Property="Label.Opacity" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="DefaultItem">
+                                            <VisualState.Setters>
+                                                <Setter Property="Opacity" Value="0.25" />
+                                                <Setter TargetName="MyMinutesLabel" Property="Label.Opacity" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Label x:Name="MyMinutesLabel"
+                                    Text="{Binding }" 
                                     Style="{StaticResource BaseLabelStyle}"/>
-                        </StackLayout>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+            </StackLayout>
         </StackLayout>
     </Grid>
 </ContentView>

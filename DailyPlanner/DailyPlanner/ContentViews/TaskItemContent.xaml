@@ -28,17 +28,24 @@
                 HorizontalOptions="EndAndExpand" 
                VerticalOptions="CenterAndExpand"
                 FontSize="{StaticResource FontSizeSmall}"/>
-        <StackLayout Grid.Column="{Binding TrashEditVisible, Converter={local:BoolToColumn}}" 
+        <StackLayout Grid.Column="{Binding TrashEditVisible, Converter={local:BoolToColumn}}"
+                     Grid.ColumnSpan="{Binding TrashEditVisible, Converter={local:BoolToColumnSpan}}"
                      IsVisible="{Binding TrashEditVisible}"
-                     Orientation="Horizontal">
+                     Orientation="Horizontal"
+                     HorizontalOptions="End">
             <Button Command="{Binding EditCommand}"
-                Text="{StaticResource FontAwesomeEdit}"
-                FontFamily="{StaticResource FontAwesomeSolidFamily}" 
-                VerticalOptions="CenterAndExpand"/>
+                    Text="{StaticResource FontAwesomeEdit}"
+                    FontFamily="{StaticResource FontAwesomeSolidFamily}" 
+                    VerticalOptions="CenterAndExpand"
+                    HeightRequest="50"
+                    WidthRequest="{Binding Source={RelativeSource Self}, Path=HeightRequest}"/>
             <Button Command="{Binding TrashCommand}"
-                Text="{StaticResource FontAwesomeTrash}"
-                FontFamily="{StaticResource FontAwesomeSolidFamily}" 
-                VerticalOptions="CenterAndExpand"/>
+                    Text="{StaticResource FontAwesomeTrash}"
+                    FontFamily="{StaticResource FontAwesomeSolidFamily}" 
+                    VerticalOptions="CenterAndExpand"
+                    HeightRequest="50"
+                    WidthRequest="{Binding Source={RelativeSource Self}, Path=HeightRequest}"
+                    Margin="10, 0, 0, 0"/>
         </StackLayout>
     </Grid>
 </ContentView>
