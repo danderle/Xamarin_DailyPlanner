@@ -41,12 +41,14 @@ namespace DailyPlanner
 
         public ICommand SaveCommand { get; set; }
 
+        public ICommand TrashCommand { get; set; }
+
         #endregion
 
         #region Constructor
 
         /// <summary>
-        /// 
+        /// Default constructor
         /// </summary>
         public PlanViewModel()
         {
@@ -84,6 +86,13 @@ namespace DailyPlanner
 
         #region Command Methods
 
+        private void Trash()
+        {
+            TaskItemSetupIsVisible = false;
+            AdditionButtonVisible = true;
+            OverlayIsVisible = false;
+        }
+
         private void Save()
         {
             if(editingIndex > -1)
@@ -119,6 +128,7 @@ namespace DailyPlanner
         {
             AddTaskCommand = new RelayCommand(AddTask);
             SaveCommand = new RelayCommand(Save);
+            TrashCommand = new RelayCommand(Trash);
         }
 
         #endregion
