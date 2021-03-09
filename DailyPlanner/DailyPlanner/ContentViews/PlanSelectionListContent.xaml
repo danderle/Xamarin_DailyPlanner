@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyPlanner.PlanSelectionListContent"
+             xmlns:local="clr-namespace:DailyPlanner"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+
+    <!--BindingContext="{x:Static local:PlanSelectionListDesignModel.Instance}"-->
+    <CollectionView ItemsSource="{Binding PlanSelectionList}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout Orientation="Horizontal"
+                            VerticalOptions="Start">
+                    <Label Text="{Binding Day}" 
+                        VerticalOptions="Start"
+                        HorizontalOptions="StartAndExpand"/>
+                    <CheckBox IsChecked="{Binding IsChecked}" 
+                            VerticalOptions="Start"/>
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentView>
