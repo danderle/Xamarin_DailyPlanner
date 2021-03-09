@@ -31,6 +31,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ContentViews\DaySelectionListContent.xaml.cs">
+      <DependentUpon>DaySelectionListContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ContentViews\DaySelectionItemContent.xaml.cs">
+      <DependentUpon>DaySelectionItemContent.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ContentViews\TaskItemContent.xaml.cs">
       <DependentUpon>TaskItemContent.xaml</DependentUpon>
     </Compile>
