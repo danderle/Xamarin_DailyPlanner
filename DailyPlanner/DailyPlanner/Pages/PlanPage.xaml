@@ -49,14 +49,13 @@
 
             <!--Task addition button-->
             <Button Text="{StaticResource FontAwesomePlus}"
-                    FontFamily="{StaticResource FontAwesomeSolidFamily}"
                     Command="{Binding AddTaskCommand}"
+                    Style="{StaticResource FontAwesomeButton}"
                     FontSize="35"
                     HeightRequest="{Binding Source={RelativeSource Self}, Path=WidthRequest}"
                     HorizontalOptions="Start"
                     CornerRadius="10"
-                    Margin="10, 20"
-                    BackgroundColor="{StaticResource DarkBlue}"/>
+                    Margin="10, 20"/>
 
             <!--Summary-->
             <StackLayout BackgroundColor="{StaticResource DarkBlue}">

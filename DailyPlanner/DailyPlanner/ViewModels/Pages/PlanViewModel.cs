@@ -34,8 +34,6 @@ namespace DailyPlanner
 
         public TaskItemSetupViewModel TaskItemSetup { get; set; } = new TaskItemSetupViewModel();
 
-        public List<string> Days { get; set; } = new List<string>();
-
         public ObservableCollection<TaskItemViewModel> TaskItems { get; set; } = new ObservableCollection<TaskItemViewModel>();
 
         public DaySelectionListViewModel DaySelectionList { get; set; } = new DaySelectionListViewModel();
@@ -107,8 +105,8 @@ namespace DailyPlanner
         {
             DaySelectionVisible = false;
             OverlayIsVisible = false;
-            Days = DaySelectionList.GetSelected();
-            DaysValid = Days.Count == 0 ? "Select Days" : string.Join(", ", Days);
+            var days = DaySelectionList.GetSelected();
+            DaysValid = days.Count == 0 ? "Select Days" : string.Join(", ", days);
         }
 
         private void Trash()
