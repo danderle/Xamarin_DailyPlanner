@@ -20,16 +20,8 @@
                         Style="{StaticResource LabelHeaderStyle}"/>
 
                 <!--Checkboxes for the week-->
-                <StackLayout Orientation="Horizontal"
-                            HorizontalOptions="CenterAndExpand">
-                    <CheckBox Color="{StaticResource White}" />
-                    <CheckBox Color="{StaticResource White}"/>
-                    <CheckBox Color="{StaticResource White}"/>
-                    <CheckBox Color="{StaticResource White}"/>
-                    <CheckBox Color="{StaticResource White}"/>
-                    <CheckBox Color="{StaticResource White}"/>
-                    <CheckBox Color="{StaticResource White}"/>
-                </StackLayout>
+                <Button Text="{Binding DaysValid}"
+                        Command="{Binding OpenDaySelectionCommand}"/>
 
                 <!--Task Time Duration labels-->
                 <StackLayout Orientation="Horizontal">
@@ -58,7 +50,6 @@
             <!--Task addition button-->
             <Button Text="{StaticResource FontAwesomePlus}"
                     FontFamily="{StaticResource FontAwesomeSolidFamily}"
-                    IsVisible="{Binding AdditionButtonVisible}"
                     Command="{Binding AddTaskCommand}"
                     FontSize="35"
                     HeightRequest="{Binding Source={RelativeSource Self}, Path=WidthRequest}"
@@ -87,6 +78,23 @@
         </Grid>
 
         <Frame CornerRadius="25"
+               IsVisible="{Binding DaySelectionVisible}"
+                BackgroundColor="{StaticResource DarkBlue}"
+                VerticalOptions="Center"
+                Margin="15">
+            <Grid RowDefinitions="2*,Auto">
+                <local:DaySelectionListContent BindingContext="{Binding DaySelectionList}" 
+                                               VerticalOptions="Center"/>
+                    <Button Grid.Row="1"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource FontAwesomeButton}"
+                            Text="{StaticResource FontAwesomeSave}"
+                            Command="{Binding SaveDaySelectionCommand}"
+                            Margin="0,15,15,0"/>
+            </Grid>
+        </Frame>
+        
+        <Frame CornerRadius="25"
                IsVisible="{Binding TaskItemSetupIsVisible}"
                 BackgroundColor="{StaticResource DarkBlue}"
                 VerticalOptions="Center"
@@ -98,7 +106,7 @@
                             Grid.Row="1">
                     <Button Style="{StaticResource FontAwesomeButton}"
                         Text="{StaticResource FontAwesomeSave}"
-                        Command="{Binding SaveCommand}"
+                        Command="{Binding SaveTaskItemCommand}"
                         Margin="0,15,15,0"/>
                     <Button Style="{StaticResource FontAwesomeButton}"
                         Text="{StaticResource FontAwesomeTrash}"

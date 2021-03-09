@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,17 +22,23 @@ namespace DailyPlanner
 
         public bool TaskItemSetupIsVisible { get; set; } = false;
 
-        public bool AdditionButtonVisible { get; set; } = true;
-
         public bool OverlayIsVisible { get; set; } = false;
 
+        public bool DaySelectionVisible { get; set; } = false;
+
         public int TotalTasks { get; set; } = 0;
+
+        public string DaysValid { get; set; } = string.Empty;
 
         public TimeSpan TotalPlannedTime { get; set; } = new TimeSpan();
 
         public TaskItemSetupViewModel TaskItemSetup { get; set; } = new TaskItemSetupViewModel();
 
+        public List<string> Days { get; set; } = new List<string>();
+
         public ObservableCollection<TaskItemViewModel> TaskItems { get; set; } = new ObservableCollection<TaskItemViewModel>();
+
+        public DaySelectionListViewModel DaySelectionList { get; set; } = new DaySelectionListViewModel();
 
         #endregion
 
@@ -39,9 +46,13 @@ namespace DailyPlanner
 
         public ICommand AddTaskCommand { get; set; }
 
-        public ICommand SaveCommand { get; set; }
+        public ICommand SaveTaskItemCommand { get; set; }
 
         public ICommand TrashCommand { get; set; }
+
+        public ICommand OpenDaySelectionCommand { get; set; }
+        
+        public ICommand SaveDaySelectionCommand { get; set; }
 
         #endregion
 
@@ -86,14 +97,28 @@ namespace DailyPlanner
 
         #region Command Methods
 
+        private void OpenDaySelection()
+        {
+            OverlayIsVisible = true;
+            DaySelectionVisible = true;
+        }
+
+        private void SaveDaySelection()
+        {
+            DaySelectionVisible = false;
+            OverlayIsVisible = false;
+            Days = DaySelectionList.GetSelected();
+            DaysValid = Days.Count == 0 ? "Select Days" : string.Join(", ", Days);
+        }
+
         private void Trash()
         {
             TaskItemSetupIsVisible = false;
-            AdditionButtonVisible = true;
+            DaySelectionVisible = false;
             OverlayIsVisible = false;
         }
 
-        private void Save()
+        private void SaveTaskItem()
         {
             if(editingIndex > -1)
             {
@@ -103,7 +128,6 @@ namespace DailyPlanner
 
             TaskItemSetupIsVisible = false;
             OverlayIsVisible = false;
-            AdditionButtonVisible = true;
             TaskItemViewModel item = TaskItemSetup.GetTaskItem();
             TotalPlannedTime += item.TimeToComplete;
             TaskItems.Add(item);
@@ -115,7 +139,6 @@ namespace DailyPlanner
         private void AddTask()
         {
             TaskItemSetupIsVisible = true;
-            AdditionButtonVisible = false;
             OverlayIsVisible = true;
             TaskItemSetup = new TaskItemSetupViewModel();
         }
@@ -127,8 +150,10 @@ namespace DailyPlanner
         private void InitializeCommands()
         {
             AddTaskCommand = new RelayCommand(AddTask);
-            SaveCommand = new RelayCommand(Save);
+            SaveTaskItemCommand = new RelayCommand(SaveTaskItem);
             TrashCommand = new RelayCommand(Trash);
+            OpenDaySelectionCommand = new RelayCommand(OpenDaySelection);
+            SaveDaySelectionCommand = new RelayCommand(SaveDaySelection);
         }
 
         #endregion
