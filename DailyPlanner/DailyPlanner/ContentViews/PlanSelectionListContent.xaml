@@ -5,21 +5,41 @@
              xmlns:local="clr-namespace:DailyPlanner"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             BindingContext="{x:Static local:PlanSelectionListDesignModel.Instance}">
 
-    <!--BindingContext="{x:Static local:PlanSelectionListDesignModel.Instance}"-->
-    <CollectionView ItemsSource="{Binding PlanSelectionList}">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <StackLayout Orientation="Horizontal"
-                            VerticalOptions="Start">
-                    <Label Text="{Binding Day}" 
-                        VerticalOptions="Start"
-                        HorizontalOptions="StartAndExpand"/>
-                    <CheckBox IsChecked="{Binding IsChecked}" 
-                            VerticalOptions="Start"/>
-                </StackLayout>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+
+    <Grid BackgroundColor="{StaticResource DarkBlue}"
+          ColumnDefinitions="*,*,*"
+          RowDefinitions="Auto, *">
+        
+        <Label Text="Days" 
+                Style="{StaticResource BaseLabelStyle}"/>
+        <Label Grid.Column="1" Text="Total Tasks" 
+                Style="{StaticResource BaseLabelStyle}"/>
+        <Label Grid.Column="2" Text="Total Time" 
+                Style="{StaticResource BaseLabelStyle}"/>
+        
+        <CollectionView ItemsSource="{Binding Items}"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="3">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="*,*,*">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenPlanPageCommand}" />
+                            <SwipeGestureRecognizer Direction="Left" Command="{Binding OpenDeleteCommand}" />
+                            <SwipeGestureRecognizer Direction="Right" Command="{Binding CloseDeleteCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="{Binding DaysValid}" 
+                               Style="{StaticResource BaseLabelStyle}"/>
+                        <Label Grid.Column="1" Text="{Binding TotalTasks}" 
+                               Style="{StaticResource BaseLabelStyle}"/>
+                        <Label Grid.Column="2" Text="{Binding TotalPlannedTime, StringFormat='{0:hh}:{0:mm}'}" 
+                               Style="{StaticResource BaseLabelStyle}"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentView>

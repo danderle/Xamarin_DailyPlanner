@@ -6,7 +6,7 @@ namespace DailyPlanner
     {
         #region Public Properties
 
-        public ObservableCollection<PlanViewModel> PlanSelectionList { get; set; }
+        public ObservableCollection<PlanViewModel> Items { get; set; }
 
         #endregion
 

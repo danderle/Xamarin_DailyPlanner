@@ -31,6 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ContentViews\PlanSelectionListContent.xaml.cs">
+      <DependentUpon>PlanSelectionListContent.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ContentViews\DaySelectionListContent.xaml.cs">
       <DependentUpon>DaySelectionListContent.xaml</DependentUpon>
     </Compile>

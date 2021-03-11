@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 
 namespace DailyPlanner
 {
@@ -23,6 +24,27 @@ namespace DailyPlanner
         /// </summary>
         public PlanSelectionListDesignModel()
         {
+            Items = new ObservableCollection<PlanViewModel>
+            {
+                new PlanViewModel
+                {
+                    TotalTasks = 10,
+                    DaysValid = "Mon, Tue, Wed",
+                    TotalPlannedTime = new TimeSpan(5,20,0),
+                },
+                new PlanViewModel
+                {
+                    TotalTasks = 9,
+                    DaysValid = "Thur, Fri, Sat",
+                    TotalPlannedTime = new TimeSpan(5,20,0),
+                },
+                new PlanViewModel
+                {
+                    TotalTasks = 1,
+                    DaysValid = "Sun",
+                    TotalPlannedTime = new TimeSpan(4,20,0),
+                },
+            };
         } 
 
         #endregion
