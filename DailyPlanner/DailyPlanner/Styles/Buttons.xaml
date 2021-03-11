@@ -9,8 +9,20 @@
 
     <Style TargetType="{x:Type Button}" x:Key="FontAwesomeButton">
         <Setter Property="TextColor" Value="{StaticResource White}"/>
-        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
         <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolidFamily}"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="FontAwesomeButtonSmall" BasedOn="{StaticResource FontAwesomeButton}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeSmall}" />
+    </Style>
+    <Style TargetType="{x:Type Button}" x:Key="FontAwesomeButtonMedium" BasedOn="{StaticResource FontAwesomeButton}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}" />
+    </Style>
+    <Style TargetType="{x:Type Button}" x:Key="FontAwesomeButtonLarge" BasedOn="{StaticResource FontAwesomeButton}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+    </Style>
+    <Style TargetType="{x:Type Button}" x:Key="FontAwesomeButtonXLarge" BasedOn="{StaticResource FontAwesomeButton}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeXLarge}" />
     </Style>
 
 </ResourceDictionary>

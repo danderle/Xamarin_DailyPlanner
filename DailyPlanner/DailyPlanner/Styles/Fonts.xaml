@@ -16,5 +16,7 @@
     <system:String x:Key="FontAwesomeSave">&#xf0c7;</system:String>
     <system:String x:Key="FontAwesomeTrash">&#xf1f8;</system:String>
     <system:String x:Key="FontAwesomeEdit">&#xf044;</system:String>
+    <system:String x:Key="FontAwesomeX">&#xf00d;</system:String>
+    <system:String x:Key="FontAwesomeCheck">&#xf00c;</system:String>
     
 </ResourceDictionary>
