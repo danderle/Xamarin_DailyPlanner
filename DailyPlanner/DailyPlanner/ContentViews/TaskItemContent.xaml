@@ -35,13 +35,13 @@
                      HorizontalOptions="End">
             <Button Command="{Binding EditCommand}"
                     Text="{StaticResource FontAwesomeEdit}"
-                    FontFamily="{StaticResource FontAwesomeSolidFamily}" 
+                    Style="{StaticResource FontAwesomeButtonSmall}" 
                     VerticalOptions="CenterAndExpand"
                     HeightRequest="50"
                     WidthRequest="{Binding Source={RelativeSource Self}, Path=HeightRequest}"/>
             <Button Command="{Binding TrashCommand}"
                     Text="{StaticResource FontAwesomeTrash}"
-                    FontFamily="{StaticResource FontAwesomeSolidFamily}" 
+                    Style="{StaticResource FontAwesomeButtonSmall}"
                     VerticalOptions="CenterAndExpand"
                     HeightRequest="50"
                     WidthRequest="{Binding Source={RelativeSource Self}, Path=HeightRequest}"

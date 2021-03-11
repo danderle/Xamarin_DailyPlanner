@@ -12,6 +12,18 @@
     <!--Total page content-->
     <Grid>
         <StackLayout>
+            <Grid ColumnDefinitions="Auto,*,Auto"
+                  RowDefinitions="Auto">
+                <Button Style="{StaticResource FontAwesomeButtonMedium}"
+                        Text="{StaticResource FontAwesomeX}"
+                        HorizontalOptions="Start"/>
+                <Label Grid.Column="1" Text="Add your planner" 
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                <Button Grid.Column="2" Style="{StaticResource FontAwesomeButtonMedium}"
+                        Text="{StaticResource FontAwesomeCheck}"
+                        HorizontalOptions="End"/>
+            </Grid>
             <StackLayout BackgroundColor="{StaticResource DarkBlue}"
                          Padding="20,5,20,5">
                 <!--Page Header-->
@@ -50,9 +62,7 @@
             <!--Task addition button-->
             <Button Text="{StaticResource FontAwesomePlus}"
                     Command="{Binding AddTaskCommand}"
-                    Style="{StaticResource FontAwesomeButton}"
-                    FontSize="35"
-                    HeightRequest="{Binding Source={RelativeSource Self}, Path=WidthRequest}"
+                    Style="{StaticResource FontAwesomeButtonLarge}"
                     HorizontalOptions="Start"
                     CornerRadius="10"
                     Margin="10, 20"/>
