@@ -1,12 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DailyPlanner.SummaryPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+             x:Class="DailyPlanner.SummaryPage"
+             xmlns:local="clr-namespace:DailyPlanner"
+             BindingContext="{x:Static local:SummaryDesignModel.Instance}">
+    
+    <Grid RowDefinitions="*,Auto">
+        <local:PlanSelectionListContent BindingContext="{Binding PlanSelectionList}" />
+        <Button Grid.Row="1"
+                Style="{StaticResource FontAwesomeButton}"
+                Text="{StaticResource FontAwesomePlus}" 
+                Command="{Binding AddPlanCommand}"
+                CornerRadius="30"/>
+    </Grid>
 </ContentPage>
