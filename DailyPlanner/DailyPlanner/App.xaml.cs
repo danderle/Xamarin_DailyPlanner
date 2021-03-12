@@ -18,7 +18,7 @@ namespace DailyPlanner
         Task InitNavigation()
         {
             var navService = ViewModelLocator.Resolve<INavigationService>();
-            return navService.NavigateToAsync<LoginViewModel>();
+            return navService.NavigateToAsync<SummaryViewModel>();
         }
 
         protected override async void OnStart()
