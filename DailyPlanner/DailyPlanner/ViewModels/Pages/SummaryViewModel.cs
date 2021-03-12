@@ -1,20 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace DailyPlanner
 {
+    /// <summary>
+    /// The view model for the <see cref="SummaryPage"/>
+    /// </summary>
     public class SummaryViewModel : BaseViewModel
     {
-        #region Field
-
-        #endregion
         #region Public Properties
 
+        /// <summary>
+        /// Shows the <see cref="PlanContent"/>
+        /// </summary>
         public bool PlanSetupVisible { get; set; } = false;
 
+        /// <summary>
+        /// Hides the add plan button because somehow it is not covered by the PlanContent
+        /// </summary>
+        public bool AddPlanButtonIsVisible => !PlanSetupVisible;
+
+        /// <summary>
+        /// The plan to add to the summary list
+        /// </summary>
         public PlanViewModel PlanSetup { get; set; }
 
+        /// <summary>
+        /// The entire list of added plans
+        /// </summary>
         public PlanSelectionListViewModel PlanSelectionList { get; set; } = new PlanSelectionListViewModel();
 
         #endregion
@@ -31,9 +43,10 @@ namespace DailyPlanner
 
         #region Constructor
 
-        public SummaryViewModel(INavigationService _navigationService)
+        public SummaryViewModel()
         {
             InitializeCommands();
+            PlanViewModel.EditItem += OnEditItem;
         }
 
         #endregion
@@ -46,7 +59,7 @@ namespace DailyPlanner
             PlanSetup = new PlanViewModel();
         }
 
-        private void CancelPlan()
+        private void CancelPlanSetup()
         {
             PlanSetupVisible = false;
         }
@@ -54,6 +67,33 @@ namespace DailyPlanner
         private void SavePlan()
         {
             PlanSetupVisible = false;
+            //dont add the item if we are editing
+            if(!PlanSetup.Editing)
+            {
+                PlanSelectionList.Items.Add(PlanSetup);
+            }
+            PlanSetup.Editing = false;
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        /// <summary>
+        /// Event to edit an existing item in the current list
+        /// </summary>
+        private void OnEditItem()
+        {
+            //find the item to edit
+            foreach(var item in PlanSelectionList.Items)
+            {
+                if(item.Editing)
+                {
+                    PlanSetup = item;
+                    break;
+                }
+            }
+            PlanSetupVisible = true;
         }
 
         #endregion
@@ -63,7 +103,7 @@ namespace DailyPlanner
         private void InitializeCommands()
         {
             AddNewPlanCommand = new RelayCommand(AddNewPlan);
-            CancelPlanCommand = new RelayCommand(CancelPlan);
+            CancelPlanCommand = new RelayCommand(CancelPlanSetup);
             SavePlanCommand = new RelayCommand(SavePlan);
         }
 

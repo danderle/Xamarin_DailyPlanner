@@ -25,11 +25,11 @@
                         Grid.ColumnSpan="3">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="*,*,*">
+                    <Grid ColumnDefinitions="{Binding DeleteIsVisible, Converter={local:BoolToColumnDefinitions}}">
                         <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding OpenPlanPageCommand}" />
-                            <SwipeGestureRecognizer Direction="Left" Command="{Binding OpenDeleteCommand}" />
-                            <SwipeGestureRecognizer Direction="Right" Command="{Binding CloseDeleteCommand}" />
+                            <SwipeGestureRecognizer Direction="Left" Command="{Binding ShowDeleteCommand}" />
+                            <SwipeGestureRecognizer Direction="Right" Command="{Binding HideDeleteCommand}" />
+                            <TapGestureRecognizer Command="{Binding EditPlanCommand}" />
                         </Grid.GestureRecognizers>
                         <Label Text="{Binding DaysValid}" 
                                Style="{StaticResource BaseLabelStyle}"/>
@@ -37,6 +37,15 @@
                                Style="{StaticResource BaseLabelStyle}"/>
                         <Label Grid.Column="2" Text="{Binding TotalPlannedTime, StringFormat='{0:hh}:{0:mm}'}" 
                                Style="{StaticResource BaseLabelStyle}"/>
+                        <Button Grid.Column="{Binding DeleteIsVisible, Converter={local:BoolToColumn}}"
+                                Command="{Binding DeleteCommand}"
+                                Text="{StaticResource FontAwesomeTrash}"
+                                Style="{StaticResource FontAwesomeButtonSmall}"
+                                IsVisible="{Binding DeleteIsVisible}"
+                                VerticalOptions="CenterAndExpand"
+                                HeightRequest="50"
+                                WidthRequest="{Binding Source={RelativeSource Self}, Path=HeightRequest}"
+                                Margin="10, 0, 0, 0"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

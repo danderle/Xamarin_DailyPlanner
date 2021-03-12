@@ -22,7 +22,7 @@ namespace DailyPlanner
         /// <summary>
         /// Default constructor
         /// </summary>
-        public SummaryDesignModel() : base(null)
+        public SummaryDesignModel()
         {
             PlanSetupVisible = true;
             PlanSelectionList = new PlanSelectionListViewModel
