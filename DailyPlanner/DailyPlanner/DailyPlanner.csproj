@@ -40,6 +40,9 @@
     <Compile Update="ContentViews\DaySelectionItemContent.xaml.cs">
       <DependentUpon>DaySelectionItemContent.xaml</DependentUpon>
     </Compile>
+    <Compile Update="ContentViews\PlanContent.xaml.cs">
+      <DependentUpon>PlanContent.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ContentViews\TaskItemContent.xaml.cs">
       <DependentUpon>TaskItemContent.xaml</DependentUpon>
     </Compile>
@@ -51,9 +54,6 @@
     </Compile>
     <Compile Update="ContentViews\TimeSelectionContent.xaml.cs">
       <DependentUpon>TimeSelectionContent.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\PlanPage.xaml.cs">
-      <DependentUpon>PlanPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\SummaryPage.xaml.cs">
       <DependentUpon>SummaryPage.xaml</DependentUpon>

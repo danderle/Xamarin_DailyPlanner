@@ -7,11 +7,6 @@
             android:TabbedPage.ToolbarPlacement="Bottom">
     
     <TabbedPage.Children>
-        <NavigationPage Title="Plan">
-            <x:Arguments>
-                <local:PlanPage BindingContext="{Binding PlanPageViewModel}"/>
-            </x:Arguments>
-        </NavigationPage>
         <NavigationPage Title="Profile">
             <x:Arguments>
                 <local:ProfilePage BindingContext="{Binding ProfilePageViewModel}"/>

@@ -1,29 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DailyPlanner.PlanPage"
+             x:Class="DailyPlanner.PlanContent"
              xmlns:local="clr-namespace:DailyPlanner"
-             NavigationPage.HasNavigationBar="False"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             BindingContext="{x:Static local:PlanDesignModel.Instance}">
-    
+             d:BindingContext="{x:Static local:PlanDesignModel.Instance}">
+
     <!--Total page content-->
     <Grid>
         <StackLayout>
-            <Grid ColumnDefinitions="Auto,*,Auto"
-                  RowDefinitions="Auto">
-                <Button Style="{StaticResource FontAwesomeButtonMedium}"
-                        Text="{StaticResource FontAwesomeX}"
-                        HorizontalOptions="Start"/>
-                <Label Grid.Column="1" Text="Add your planner" 
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"/>
-                <Button Grid.Column="2" Style="{StaticResource FontAwesomeButtonMedium}"
-                        Text="{StaticResource FontAwesomeCheck}"
-                        HorizontalOptions="End"/>
-            </Grid>
             <StackLayout BackgroundColor="{StaticResource DarkBlue}"
                          Padding="20,5,20,5">
                 <!--Page Header-->
@@ -47,14 +34,16 @@
                             Style="{StaticResource BaseLabelStyle}"/>
                 </StackLayout>
             </StackLayout>
-            
+
             <!--All task items-->
             <CollectionView ItemsSource="{Binding TaskItems}"
                             Margin="20,5"
                             VerticalScrollBarVisibility="Default">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <local:TaskItemContent BindingContext="{Binding }" />
+                        <ScrollView VerticalScrollBarVisibility="Default">
+                            <local:TaskItemContent BindingContext="{Binding }" />
+                        </ScrollView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -94,7 +83,7 @@
             <Grid RowDefinitions="2*,Auto">
                 <local:DaySelectionListContent BindingContext="{Binding DaySelectionList}" 
                                                VerticalOptions="Center"/>
-                    <Button Grid.Row="1"
+                <Button Grid.Row="1"
                             HorizontalOptions="Center"
                             Style="{StaticResource FontAwesomeButton}"
                             Text="{StaticResource FontAwesomeSave}"
@@ -102,7 +91,7 @@
                             Margin="0,15,15,0"/>
             </Grid>
         </Frame>
-        
+
         <Frame CornerRadius="25"
                IsVisible="{Binding TaskItemSetupIsVisible}"
                 BackgroundColor="{StaticResource DarkBlue}"
@@ -125,4 +114,4 @@
             </Grid>
         </Frame>
     </Grid>
-</ContentPage>
+</ContentView>

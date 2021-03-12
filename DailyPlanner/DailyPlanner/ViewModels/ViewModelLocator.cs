@@ -32,7 +32,6 @@ namespace DailyPlanner
             Register<DashboardViewModel, DashboardPage>();
             Register<LoginViewModel, LoginPage>();
             Register<ProfileViewModel, ProfilePage>();
-            Register<PlanViewModel, PlanPage>();
             Register<SummaryViewModel, SummaryPage>();
             Register<SettingsViewModel, SettingsPage>();
 

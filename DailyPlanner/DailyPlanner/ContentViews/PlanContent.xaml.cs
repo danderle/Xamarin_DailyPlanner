@@ -5,9 +5,9 @@ using Xamarin.Forms.Xaml;
 namespace DailyPlanner
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PlanPage : ContentPage
+    public partial class PlanContent : ContentView
     {
-        public PlanPage()
+        public PlanContent()
         {
             InitializeComponent();
         }
