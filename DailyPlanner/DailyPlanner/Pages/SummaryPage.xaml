@@ -3,39 +3,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DailyPlanner.SummaryPage"
              xmlns:local="clr-namespace:DailyPlanner"
+             NavigationPage.HasNavigationBar="False"
              BindingContext="{x:Static local:SummaryDesignModel.Instance}">
     
-    <Grid RowDefinitions="*,Auto">
+    <Grid RowDefinitions="*,Auto"
+          BackgroundColor="{StaticResource DarkBlue}">
+        <!--The plan list-->
+        <local:PlanSelectionListContent Grid.Row="0" 
+                                        BindingContext="{Binding PlanSelectionList}" />
         
-        <local:PlanSelectionListContent BindingContext="{Binding PlanSelectionList}" />
+        <!--Add a new plan button-->
         
         <Button Grid.Row="1"
                 Style="{StaticResource FontAwesomeButton}"
                 Text="{StaticResource FontAwesomePlus}" 
                 Command="{Binding AddNewPlanCommand}"
+                IsVisible="{Binding AddPlanButtonIsVisible}"
                 CornerRadius="30"/>
 
         <!--Overlays the entire page to setup a day plan-->
-        <StackLayout Grid.RowSpan="2"
-                     IsVisible="{Binding PlanSetupVisible}"
-                     BackgroundColor="{StaticResource DarkBlue}">
-            <Grid ColumnDefinitions="Auto,*,Auto"
+        <Grid Grid.RowSpan="2"
+                IsVisible="{Binding PlanSetupVisible}"
+                BackgroundColor="{StaticResource DarkBlue}">
+            <StackLayout>
+                <Grid ColumnDefinitions="Auto,*,Auto"
                 RowDefinitions="Auto">
-                <Button Style="{StaticResource FontAwesomeButtonMedium}"
+
+                    <!--Cancel Plan setup button-->
+                    <Button Style="{StaticResource FontAwesomeButtonMedium}"
                     Text="{StaticResource FontAwesomeX}"
                     Command="{Binding CancelPlanCommand}"
                     HorizontalOptions="Start"/>
-                <Label Grid.Column="1" 
+                    <!--Save planner label-->
+                    <Label Grid.Column="1" 
                        Text="Save your planner"
                        Style="{StaticResource LabelHeaderStyle}"
                        FontSize="{StaticResource FontSizeMedium}"
                        HorizontalTextAlignment="Center"/>
-                <Button Grid.Column="2" Style="{StaticResource FontAwesomeButtonMedium}"
+                    <!--Save plan setup button-->
+                    <Button Grid.Column="2" Style="{StaticResource FontAwesomeButtonMedium}"
                     Text="{StaticResource FontAwesomeCheck}"
                     Command="{Binding SavePlanCommand}"
                     HorizontalOptions="End"/>
-            </Grid>
-            <local:PlanContent BindingContext="{Binding PlanSetup}" />
-        </StackLayout>
+                </Grid>
+                <local:PlanContent BindingContext="{Binding PlanSetup}" />
+            </StackLayout>
+        </Grid>
     </Grid>
 </ContentPage>
