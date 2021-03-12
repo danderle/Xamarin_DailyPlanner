@@ -6,13 +6,14 @@ namespace DailyPlanner
 {
     public class SummaryViewModel : BaseViewModel
     {
-        #region Fields
-
-        private INavigationService navigationService;
+        #region Field
 
         #endregion
-
         #region Public Properties
+
+        public bool PlanSetupVisible { get; set; } = false;
+
+        public PlanViewModel PlanSetup { get; set; }
 
         public PlanSelectionListViewModel PlanSelectionList { get; set; } = new PlanSelectionListViewModel();
 
@@ -20,7 +21,11 @@ namespace DailyPlanner
 
         #region Commands
 
-        public ICommand AddPlanCommand { get; set; }
+        public ICommand AddNewPlanCommand { get; set; }
+
+        public ICommand CancelPlanCommand { get; set; }
+
+        public ICommand SavePlanCommand { get; set; }
 
         #endregion
 
@@ -28,7 +33,6 @@ namespace DailyPlanner
 
         public SummaryViewModel(INavigationService _navigationService)
         {
-            navigationService = _navigationService;
             InitializeCommands();
         }
 
@@ -36,10 +40,20 @@ namespace DailyPlanner
 
         #region Command Methods
 
-        private async void AddPlanAsync()
+        private void AddNewPlan()
         {
-            // navigate to the Plan page
-            await navigationService.NavigateToAsync<PlanViewModel>();
+            PlanSetupVisible = true;
+            PlanSetup = new PlanViewModel();
+        }
+
+        private void CancelPlan()
+        {
+            PlanSetupVisible = false;
+        }
+
+        private void SavePlan()
+        {
+            PlanSetupVisible = false;
         }
 
         #endregion
@@ -48,7 +62,9 @@ namespace DailyPlanner
 
         private void InitializeCommands()
         {
-            AddPlanCommand = new RelayCommand(AddPlanAsync);
+            AddNewPlanCommand = new RelayCommand(AddNewPlan);
+            CancelPlanCommand = new RelayCommand(CancelPlan);
+            SavePlanCommand = new RelayCommand(SavePlan);
         }
 
         #endregion

@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DailyPlanner
 {
     /// <summary>
-    /// The view model for the <see cref="PlanPage"/>
+    /// The view model for the <see cref="PlanContent"/>
     /// </summary>
     public class PlanViewModel : BaseViewModel
     {
@@ -35,8 +33,6 @@ namespace DailyPlanner
         public TaskItemSetupViewModel TaskItemSetup { get; set; } = new TaskItemSetupViewModel();
 
         public ObservableCollection<TaskItemViewModel> TaskItems { get; set; } = new ObservableCollection<TaskItemViewModel>();
-
-        public DaySelectionListViewModel DaySelectionList { get; set; } = new DaySelectionListViewModel();
 
         #endregion
 
@@ -103,9 +99,10 @@ namespace DailyPlanner
 
         private void SaveDaySelection()
         {
+            var daySelectionList = new DaySelectionListViewModel();
             DaySelectionVisible = false;
             OverlayIsVisible = false;
-            var days = DaySelectionList.GetSelected();
+            var days = daySelectionList.GetSelected();
             DaysValid = days.Count == 0 ? "Select Days" : string.Join(", ", days);
         }
 
